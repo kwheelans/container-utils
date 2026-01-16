@@ -1,0 +1,16 @@
+[package]
+name = "container-utils"
+version = "0.1.0"
+edition = "2024"
+authors = ["Kevin Wheelans <kevin.wheelans@proton.me>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/kwheelans/container-utils"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"]}
+reqwest = { version = "0.13", features = ["blocking"]}
+tracing = "0.1"
+tracing-subscriber = "0.3"
+zip = { version = "7", default-features = false, features = ["deflate-flate2","deflate-flate2-zlib-rs"]}
