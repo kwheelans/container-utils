@@ -2,14 +2,16 @@ use std::ffi::OsStr;
 use std::io::Cursor;
 use std::path::PathBuf;
 use std::{fs, io};
-use tracing::info;
+use tracing::{debug, info};
 
-const PICO_CSS_URL: &str = "https://github.com/picocss/pico/archive/refs/tags/v2.1.1.zip";
-const PICO_CSS_PATH: &str = "css";
+const PICO_CSS_URL_BASE: &str = "https://github.com/picocss/pico/archive/refs/tags/";
 
-pub fn download_css_archive() -> Result<(), anyhow::Error> {
-    info!("Downloading Pico CSS from {}", PICO_CSS_URL);
-    let response = reqwest::blocking::get(PICO_CSS_URL)?.error_for_status()?;
+pub fn download_css_archive(version: &str, output_path: PathBuf) -> Result<(), anyhow::Error> {
+    debug!("version: {}", version);
+    debug!("output_path: {:?}", output_path);
+    let url = format!("{}v{}.zip", PICO_CSS_URL_BASE, version);
+    info!("Downloading Pico CSS from {}", url);
+    let response = reqwest::blocking::get(url)?.error_for_status()?;
     let content = Cursor::new(response.bytes()?);
     let mut archive = zip::ZipArchive::new(content)?;
     let mut selected: Vec<_> = Vec::new();
@@ -33,7 +35,7 @@ pub fn download_css_archive() -> Result<(), anyhow::Error> {
         }
     }
 
-    let extract_path = PathBuf::from(PICO_CSS_PATH);
+    let extract_path = PathBuf::from(output_path);
     if !extract_path.is_dir() {
         info!("Creating directory {}", extract_path.display());
         fs::create_dir(extract_path.as_path())?;
