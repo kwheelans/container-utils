@@ -24,7 +24,7 @@ pub struct PicoCssDownloadArgs {
     #[arg(short, long, default_value = "2.1.1")]
     pub pico_css_version: String,
 
-    ///  Pico CSS version to download
+    ///  Path to extract PicoCSS files to
     #[arg(short, long, default_value = "css")]
     pub output_path: PathBuf,
 }
