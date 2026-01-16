@@ -16,7 +16,6 @@ fn main() {
     tracing_subscriber::fmt()
         .with_max_level(log_level)
         .init();
-    let cli = CliArgs::parse();
 
     match cli.commands {
         Commands::PicoCssDownload(args) => {

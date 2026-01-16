@@ -2,7 +2,7 @@ FROM lukemathwalker/cargo-chef:latest AS chef
 
 FROM chef AS planner
 WORKDIR /recipe
-COPY . .
+COPY --exclude=target/ . .
 RUN cargo chef prepare --recipe-path recipe.json
 
 FROM chef AS builder
@@ -20,4 +20,5 @@ RUN cargo build --release --frozen
 FROM debian:13-slim
 WORKDIR /app
 ENV PATH=/app:$PATH
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /app/target/release/container-utils /app
