@@ -20,4 +20,4 @@ RUN cargo build --release --frozen
 FROM debian:13-slim
 WORKDIR /app
 ENV PATH=/app:$PATH
-COPY --from=builder /container-utils/target/release/container-utils /app
+COPY --from=builder /app/target/release/container-utils /app
