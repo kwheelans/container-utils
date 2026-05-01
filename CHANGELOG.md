@@ -1,4 +1,8 @@
-# v 0.1.2
+# v0.1.3
+## Changes
+- lock file updates
+
+# v0.1.2
 - add linux/arm64 docker build
 
 # v0.1.1
