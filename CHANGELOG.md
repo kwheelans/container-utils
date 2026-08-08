@@ -1,3 +1,7 @@
+# v0.2.0
+## Features
+ - Added extract-zip-from-url command
+
 # v0.1.3
 ## Changes
 - lock file updates

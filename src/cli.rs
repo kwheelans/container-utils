@@ -1,5 +1,5 @@
-use std::path::PathBuf;
 use clap::{Args, Parser, Subcommand};
+use std::path::PathBuf;
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -14,8 +14,10 @@ pub struct CliArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
+    /// Extract zip archive from a URL
+    ExtractZipFromUrl(ExtractZipFromUrl),
     /// Download PicoCSS
-    PicoCssDownload(PicoCssDownloadArgs)
+    PicoCssDownload(PicoCssDownloadArgs),
 }
 
 #[derive(Debug, Args)]
@@ -26,5 +28,16 @@ pub struct PicoCssDownloadArgs {
 
     ///  Path to extract PicoCSS files to
     #[arg(short, long, default_value = "css")]
-    pub output_path: PathBuf,
+    pub extract_path: PathBuf,
+}
+
+#[derive(Debug, Args)]
+pub struct ExtractZipFromUrl {
+    ///  Zip Archive URL
+    #[arg(short, long)]
+    pub url: String,
+
+    /// Path to extract zip archive to
+    #[arg(short, long)]
+    pub extract_path: PathBuf,
 }
