@@ -1,3 +1,7 @@
+# v0.2.1
+## Changes
+- update `zip` dependency to v9
+
 # v0.2.0
 ## Features
  - Added extract-zip-from-url command
