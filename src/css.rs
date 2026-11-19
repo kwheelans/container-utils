@@ -15,7 +15,8 @@ pub fn download_css_archive(version: &str, extract_path: PathBuf) -> Result<(), 
     let mut selected: Vec<_> = Vec::new();
 
     for n in archive.file_names() {
-        let path = PathBuf::from(n);
+        let name = n?.to_string();
+        let path = PathBuf::from(name);
         let extension = path.extension().unwrap_or_default();
         let file_stem = path
             .file_stem()
